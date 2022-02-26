@@ -3,8 +3,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const ejs = require("ejs");
 
-
 app.set("view engine", "ejs");
+
+const homeStartingContent =
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae asperiores impedit dolor ea, commodi reiciendis inventore id? Quos deleniti, non illum aperiam odit ipsa odio totam voluptates, delectus debitis voluptatibus!" 
+
+const aboutContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae asperiores impedit dolor ea, commodi reiciendis inventore id? Quos deleniti, non illum aperiam odit ipsa odio totam voluptates, delectus debitis voluptatibus!"
+
+const contentContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae asperiores impedit dolor ea, commodi reiciendis inventore id? Quos deleniti, non illum aperiam odit ipsa odio totam voluptates, delectus debitis voluptatibus!"
 
 app.use(bodyParser.urlencoded({extended: true}));
 //static files
@@ -12,11 +18,10 @@ app.use(express.static("public"));
 
 //home
 app.get("/", (req, res)=>{
-    res.render("home")
+    res.render("home", {
+        homeStartingContent : homeStartingContent
+    });
 });
-
-//post
-
 
 
 app.listen(3000, ()=>{
