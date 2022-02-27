@@ -16,10 +16,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 
+let posts = [];
+
 app.get("/", (req, res)=>{
     res.render("home", {
-        homeStartingContent : homeStartingContent
+        homeStartingContent : homeStartingContent,
+        posts : posts
     });
+
 });
 
 app.get("/about", (req, res)=>{
@@ -33,6 +37,23 @@ app.get("/contact", (req, res)=>{
         contactContent : contactContent
     });
 });
+
+app.get("/compose", (req, res)=>{
+    res.render("compose")
+});
+
+app.post("/compose", (req, res)=>{
+    const publish = req.body.composePost
+    // console.log(publish)
+    const blogPost = {
+    title: req.body.composeTitle,
+    content: req.body.composePost
+    };
+    // console.log(blogPost);
+    const loggedPosts = posts.push(blogPost);
+    console.log(loggedPosts);
+    res.redirect("/");
+}); 
 
 app.listen(3000, ()=>{
 console.log("Server is listening on Port 3000")
