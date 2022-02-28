@@ -8,11 +8,18 @@
     <%= homeStartingContent %>
 </p>
 
+
 <p>
     <%= console.log(posts) %>
-    <% for(let i = 0; i < posts.length; i++){ %>
-       <p><% console.log(posts[i].title)%></p>
-       <% } %>
+</p>
+
+       <% posts.forEach(post => { %>
+        
+        <h1><%= post.title %></h1>
+        <p><%= post.content %></p>
+
+       <% }); %>
+
 </p>
 
 
