@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const _ = require('lodash');
+const _ = require("lodash");
+const { inRange, escapeRegExp } = require("lodash");
 
 app.set("view engine", "ejs");
 
@@ -58,17 +59,19 @@ app.post("/compose", (req, res)=>{
  });
  
  app.get("/posts/:singlePost", (req, res)=>{
-    const requestedTitle = (req.params.singlePost)
-
+    const requestedTitle = _.lowerCase(req.params.singlePost);
+    
     posts.forEach( post => {
-       const storedTitle = post.title
+       const storedTitle = _.lowerCase(post.title);
 
-       if(requestedTitle === storedTitle){
-        console.log("There's a match")
-    } else console.log("No match found")
-    });
- });
-
+       if(storedTitle === requestedTitle){
+       res.render("post", {
+           title : post.title, 
+           content : post.content
+       });
+     };
+  });
+});
 
 app.listen(3000, ()=>{
 console.log("Server is listening on Port 3000")

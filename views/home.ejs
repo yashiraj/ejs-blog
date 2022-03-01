@@ -8,20 +8,17 @@
     <%= homeStartingContent %>
 </p>
 
-
 <p>
     <%= console.log(posts) %>
 </p>
 
-       <% posts.forEach(post => { %>
+<% posts.forEach(post => { %>
         
-        <h1><%= post.title %></h1>
-        <p><%= post.content %></p>
-
-       <% }); %>
+    <h1><%= post.title %></h1>
+    <p><%= post.content.substring(0, 100) + "..." %></p>
+<% }) %>
 
 </p>
-
 
 
 <%-include("partials/footer")%>
